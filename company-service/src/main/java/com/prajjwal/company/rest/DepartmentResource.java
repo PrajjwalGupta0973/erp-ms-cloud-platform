@@ -2,16 +2,12 @@ package com.prajjwal.company.rest;
 
 import java.util.List;
 
-import org.hibernate.reactive.mutiny.Mutiny;
-
 import com.prajjwal.company.dto.DepartmentDto;
 import com.prajjwal.company.entity.Department;
 
 import io.quarkus.hibernate.reactive.panache.Panache;
 import io.smallrye.mutiny.Multi;
 import io.smallrye.mutiny.Uni;
-import io.vertx.mutiny.pgclient.PgPool;
-import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;

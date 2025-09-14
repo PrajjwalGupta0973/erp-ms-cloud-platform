@@ -1,0 +1,23 @@
+spring:
+  sql:
+      init:
+        mode: always
+        schema-locations: classpath:schema.sql
+  application:
+    name: employee-service
+  
+  r2dbc:
+#    url: r2dbc:postgresql://localhost:5432/postgres?options=-c%20search_path=employee_db
+    url:  r2dbc:postgresql://localhost:5432/employee_db
+    username: postgres
+    password: PrajjwalB4@
+#debug: true
+logging:
+  level:
+    io:
+      r2dbc:
+        postgresql: DEBUG
+    org:
+      springframework:
+        data:
+          r2dbc: DEBUG
