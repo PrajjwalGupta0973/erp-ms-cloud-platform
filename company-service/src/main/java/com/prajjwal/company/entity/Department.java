@@ -1,6 +1,7 @@
 package com.prajjwal.company.entity;
 
 import io.quarkus.hibernate.reactive.panache.PanacheEntity;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +11,6 @@ import lombok.Setter;
 @Setter
 public class Department extends PanacheEntity {
 
-    public String departmentName;
+	@Column(name = "department_name")
+	public String departmentName;
 }

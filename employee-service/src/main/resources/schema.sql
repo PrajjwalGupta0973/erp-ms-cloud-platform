@@ -1,4 +1,6 @@
-CREATE TABLE IF NOT EXISTS employee (
+CREATE SEQUENCE IF NOT EXISTS employee_db.employee_id_seq START 1 INCREMENT 1;
+
+CREATE TABLE IF NOT EXISTS employee_db.employee (
     employee_id   BIGSERIAL PRIMARY KEY,
     first_name    VARCHAR(100) NOT NULL,
     last_name     VARCHAR(100) NOT NULL,
@@ -9,5 +11,3 @@ CREATE TABLE IF NOT EXISTS employee (
     total_salary  NUMERIC(15,2),
     project_id    BIGINT
 );
-
-CREATE SEQUENCE IF NOT EXISTS employee_id_seq START 1 INCREMENT 1;

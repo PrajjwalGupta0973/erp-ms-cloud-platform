@@ -1,13 +1,8 @@
 spring:
-  application:
-    name: project-service
-
 #  datasource:
 #    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=project_db_schema
 #    username: postgres
 #    password: PrajjwalB4@
-#    driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -15,6 +10,5 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-
 server:
-  port: 8082
+  port: 8080
