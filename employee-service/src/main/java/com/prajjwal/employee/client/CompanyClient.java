@@ -10,14 +10,14 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Component
-public class DepartmentClient {
+public class CompanyClient {
 
     private final WebClient webClient;
 
-    public DepartmentClient() {
+    public CompanyClient() {
         // "company-service" is the Kubernetes service name
         this.webClient = WebClient.builder()
-                                  .baseUrl("http://localhost:8081") 
+                                  .baseUrl("http://host.docker.internal:8081") 
                                   .build();
     }
 

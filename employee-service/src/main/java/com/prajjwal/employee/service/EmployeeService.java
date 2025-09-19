@@ -2,7 +2,7 @@ package com.prajjwal.employee.service;
 
 import org.springframework.stereotype.Service;
 
-import com.prajjwal.employee.client.DepartmentClient;
+import com.prajjwal.employee.client.CompanyClient;
 import com.prajjwal.employee.client.PayrollClient;
 import com.prajjwal.employee.client.ProjectClient;
 import com.prajjwal.employee.dto.DepartmentDto;
@@ -20,11 +20,11 @@ import reactor.core.publisher.Mono;
 public class EmployeeService {
 
 	private final EmployeeRepository employeeRepository;
-	private final DepartmentClient departmentClient;
+	private final CompanyClient departmentClient;
 	private final ProjectClient projectClient;
 	private final PayrollClient payrollClient;
 
-	public EmployeeService(EmployeeRepository employeeRepository, DepartmentClient departmentClient,
+	public EmployeeService(EmployeeRepository employeeRepository, CompanyClient departmentClient,
 			ProjectClient projectClient, PayrollClient payrollClient) {
 		this.employeeRepository = employeeRepository;
 		this.departmentClient = departmentClient;
