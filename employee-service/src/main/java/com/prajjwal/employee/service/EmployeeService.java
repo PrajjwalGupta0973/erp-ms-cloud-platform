@@ -33,12 +33,6 @@ public class EmployeeService {
 	}
 
 	public Mono<EmployeeDto> createEmployee(EmployeeDto employeeDto) {
-//		
-//		 Mono<EmployeeDto>  a= employeeRepository.save(new Employee()).flatMap(savedEmployee -> Mono.zip(
-//                departmentClient.getDepartmentById(1L),
-//                projectClient.getProjectById(1L)
-//            , (dept, proj) -> toEmployeeDto(null, dept, proj)));
-//		 
 		return payrollClient.calculatePayroll(
 				PayrollRequest.builder().baseSalary(employeeDto.getBaseSalary()).bonus(employeeDto.getBonus()).build())
 				.flatMap(payrollResult -> {
@@ -47,10 +41,6 @@ public class EmployeeService {
 							.departmentId(employeeDto.getDepartment().getId())
 							.projectId(employeeDto.getProject().getProjectId()).baseSalary(employeeDto.getBaseSalary())
 							.bonus(employeeDto.getBonus()).totalSalary(payrollResult.grossSalary()).build();
-//					return employeeRepository.save(employee).flatMap(savedEmployee -> Mono.zip(
-//			                departmentClient.getDepartmentById(savedEmployee.getDepartmentId()),
-//			                projectClient.getProjectById(1L)
-//			            , (dept, proj) -> toEmployeeDto(null, dept, proj)));
 
 					return employeeRepository.save(employee)
 							.flatMap(savedEmployee -> Mono.zip(
