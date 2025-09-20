@@ -1,5 +1,6 @@
-quarkus:
-  http:
-    port: 8082
-  funqy:
-    export: calculatePayroll
+"%dev":
+  quarkus:
+    http:
+      port: 8080
+    funqy:
+      export: calculatePayroll

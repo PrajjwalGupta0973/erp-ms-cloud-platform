@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 public class PayrollClient {
 
 	private final WebClient webClient;
-	private static final String PAYROLL_SERVICE_BASE_URL = "http://host.docker.internal:8082";
+	private static final String PAYROLL_SERVICE_BASE_URL = "http://payroll-calculator";
 
 	public PayrollClient() {
 		this.webClient = WebClient.builder().baseUrl(PAYROLL_SERVICE_BASE_URL).build();

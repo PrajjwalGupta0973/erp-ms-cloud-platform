@@ -17,7 +17,7 @@ public class CompanyClient {
     public CompanyClient() {
         // "company-service" is the Kubernetes service name
         this.webClient = WebClient.builder()
-                                  .baseUrl("http://host.docker.internal:8081") 
+                                  .baseUrl("http://company-service") 
                                   .build();
     }
 

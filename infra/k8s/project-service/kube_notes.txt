@@ -1,0 +1,125 @@
+So far i have use 4 types of frameworks:
+- Spring reactive : employee-service
+- Traditional Spring boot : project-service
+- Quarkus reactive: company-serice
+- payroll-service : serverless quarkus
+
+secret management :
+	one time activity either like below :
+	helm upgrade --install employee-service ./chart \
+  --namespace erp-dev \
+  --set db.username=postgres \
+  --set db.password=$DB_PASSWORD
+
+	Or only first time add secret.yml and then never add secret.yml 
+PrajjwalB4@: UHJhamp3YWxCNEA=	
+host.minikube.internal
+
+
+
+minikube start
+kubectl apply -f secret.yml -n erp-dev
+minikube addons enable ingress
+export DOCKER_PASSWORD=newPrajjwalB4@
+
+minikube tunnel or minikube tunnel --bind-address=127.0.0.1 (when project-service.local not working) 
+forcefully launch the service bypassing maunal configuration : minikube service employee-service -n erp-dev
+add "127.0.0.1 project-service.local" in C:\Windows\System32\drivers\etc\hosts
+Uninstall (deletes every k8 resource attached with release) : 
+			helm uninstall <release-name> -n erp-dev
+			helm uninstall project-service -n erp-dev
+            helm uninstall employee-service -n erp-dev
+            helm uninstall company-service -n erp-dev
+            helm uninstall payroll-calculator -n erp-dev
+			
+			
+project-serice helm:
+From root director of project-service:
+../infra/k8s/project-service/build-and-push.sh
+helm upgrade --install project-service ./project-service -f ./project-service/values-dev.yml -n erp-dev --debug --dry-run
+kubectl rollout restart deployment project-service -n erp-dev
+
+*
+*
+*
+employee-service helm :
+../infra/k8s/employee-service/build-and-push.sh
+helm upgrade --install employee-service ./employee-service -n erp-dev -f ./employee-service/values-dev.yml
+kubectl rollout restart deployment employee-service -n erp-dev
+*
+*
+*
+company-service helm :
+../infra/k8s/company-service/build-and-push.sh
+helm upgrade --install company-service ./company-service -n erp-dev -f ./company-service/values-prod.yaml
+only same tag image change :
+kubectl rollout restart deployment company-service -n erp-dev
+Chart update (not reliable): 
+helm upgrade company-service ./company-service -f ./company-service/values-prod.yaml -n erp-dev
+*
+*
+*
+payroll-calculator helm :
+../infra/k8s/payroll-calculator/build-and-push.sh
+helm upgrade --install payroll-calculator ./payroll-calculator -n erp-dev -f ./payroll-calculator/values-dev.yaml
+only same tag image change :
+kubectl rollout restart deployment payroll-calculator -n erp-dev
+Chart update (not reliable): 
+helm upgrade payroll-calculator ./payroll-calculator -f ./payroll-calculator/values-dev.yaml -n erp-dev
+
+	
+kubectl get pods -n erp-dev
+kubectl describe pod employee-service-5965bbf897-fxrn9 -n erp-dev
+
+Get logs: 
+kubectl logs company-service-64ddd78fd9-zjkjb  -n erp-dev 
+kubectl logs employee-service-5965bbf897-fxrn9 -n erp-dev 
+kubectl logs payroll-calculator-86c949f6dd-wwb86   -n erp-dev 
+
+kubectl get svc -n erp-dev
+kubectl get deployments -n erp-dev
+kubectl describe deployment company-service -n erp-dev
+
+
+kubectl get secret employee-service-docker-secret -n erp-dev
+kubectl get secret employee-service-secret -n erp-dev
+kubectl delete secret employee-service-docker-secret -n erp-dev
+kubectl delete secret employee-service-secret -n erp-dev
+
+
+company-service:
+docker build -t company-service:1.0 .
+docker run -p 8081:8081 -e QUARKUS_PROFILE=prod company-service:1.0
+
+payroll-service:
+docker build -t payroll-calculator:1.0 .
+docker build --no-cache -t payroll-calculator:1.0 . 
+docker run -p 8082:8082 payroll-calculator:1.0
+
+project-service:
+docker build -t project-service:1.0 .
+docker run -p 8083:8083 project-service:1.0
+
+employee-service:
+docker build -t employee-service:1.0 .
+docker run -p 8080:8080 employee-service:1.0
+
+
+
+	
+	LEARN LABEL and SELECTORs
+	in service.yml, these should be like below:
+	apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  type: {{ .Values.service.type }}
+  selector:
+    app: {{ .Release.Name }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
+

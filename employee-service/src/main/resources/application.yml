@@ -9,7 +9,7 @@ spring:
   r2dbc:
     url: r2dbc:postgresql://host.docker.internal:5432/postgres?currentSchema=employee_db
     username: postgres
-    password: PrajjwalB4@
+    password: ${DB_PASSWORD}
 #debug: true
 logging:
   level:
