@@ -19,14 +19,19 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - containerPort: {{ .Values.service.port }}
+            - containerPort: {{ .Values.service.targetPort }}
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: {{ .Values.spring.profiles.active | quote }}
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: employee-service-secret
+                  key: dbPassword
           envFrom:
             - configMapRef:
                 name: {{ .Release.Name }}-config
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       imagePullSecrets:
-        - name: {{ .Release.Name }}-dockerhub-secret
+        - name: employee-service-docker-secret #to be supplied by pre-created secret.yml while deployment

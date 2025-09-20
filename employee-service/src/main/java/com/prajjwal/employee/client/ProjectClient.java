@@ -14,7 +14,7 @@ public class ProjectClient {
 
     private final WebClient.Builder webClientBuilder;
 
-    private static final String PROJECT_SERVICE_BASE_URL = "http://project-service:8083/api/v1/projects";
+    private static final String PROJECT_SERVICE_BASE_URL = "http://project-service/api/v1/projects";
 
     public Mono<ProjectDto> getProjectById(Long projectId) {
         return webClientBuilder.build()

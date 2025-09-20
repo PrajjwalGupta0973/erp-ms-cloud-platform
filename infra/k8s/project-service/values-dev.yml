@@ -3,19 +3,12 @@ replicaCount: 1
 image:
   repository: prajjwalgupta0973/project-service
   tag: latest
- # pullPolicy: Always
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
-imagePullSecrets:
-  dockerhub:
-    username: prajjwalgupta0973
-    password: newPrajjwalB4@
-    email: prajjwalgupta0973@gmail.com  
 service:
   type: ClusterIP
- # port: 80
- # targetPort: 8081
-  port: 8083
+  port: 80
+  targetPort: 8080
 
 spring:
   profiles:
@@ -29,23 +22,7 @@ autoscaling:
   maxReplicas: 3
   cpuUtilization: 50
   memoryUtilization: 70
-
-config:
-  SPRING_DATASOURCE_URL: jdbc:postgresql://host.minikube.internal:5432/postgres?currentSchema=project_db_schema
-  SPRING_DATASOURCE_USERNAME: postgres
-
-secret:
-  SPRING_DATASOURCE_PASSWORD: PrajjwalB4@
 ingress:
-  enabled: true
-  className: nginx
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  hosts:
-    - host: project-service.local
-      paths:
-        - path: /
-          pathType: Prefix
-  tls: []
+  enabled: false
 serviceAccount:
   create: false
