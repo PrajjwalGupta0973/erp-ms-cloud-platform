@@ -15,7 +15,13 @@ spring:
     active: dev
 
 
-resources: {}
+resources: 
+  requests:
+     cpu: 100m #(means: 100m = 0.1 CPU core = 10% of a single CPU core.)
+     memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
 nodeSelector: {}
 tolerations: []
 affinity: []
