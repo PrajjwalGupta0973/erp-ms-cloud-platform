@@ -26,9 +26,9 @@ spec:
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: employee-service-secret
+                  name: common-secret
                   key: dbPassword
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       imagePullSecrets:
-        - name: employee-service-docker-secret #to be supplied by pre-created secret.yml while deployment
+        - name: common-docker-secret #to be supplied by pre-created secret.yml while deployment
