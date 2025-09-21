@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ if not .Values.autoscaling.enabled }}{{ .Values.replicaCount }}{{ else }}1{{ end }}  
   selector:
     matchLabels:
       app: {{ .Release.Name }}

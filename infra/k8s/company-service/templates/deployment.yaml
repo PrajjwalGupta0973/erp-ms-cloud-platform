@@ -5,9 +5,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: {{ if not .Values.autoscaling.enabled }}{{ .Values.replicaCount }}{{ else }}1{{ end }}  
   selector:
     matchLabels:
       app: {{ .Release.Name }}
@@ -32,7 +30,9 @@ spec:
                 secretKeyRef:
                   name: common-secret
                   key: dbPassword
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           
       imagePullSecrets:
-        - name: employee-service-docker-secret
+        - name: common-docker-secret
 

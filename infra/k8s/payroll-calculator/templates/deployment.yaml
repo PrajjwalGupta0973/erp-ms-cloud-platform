@@ -5,9 +5,7 @@ metadata:
   labels:
     app: {{ .Release.Name }}
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
+  replicas: {{ if not .Values.autoscaling.enabled }}{{ .Values.replicaCount }}{{ else }}1{{ end }}  
   selector:
     matchLabels:
       app: {{ .Release.Name }}
@@ -27,6 +25,7 @@ spec:
           env:
             - name: QUARKUS_PROFILE
               value: {{ .Values.env.quarkusProfile | quote }}
-          
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
       imagePullSecrets:
         - name: common-docker-secret
