@@ -5,7 +5,7 @@ COPY .mvn .mvn
 COPY pom.xml .
 RUN ./mvnw dependency:go-offline -B
 COPY src ./src
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw clean package -Dquarkus.http.root-path=/api/v1/payroll -DskipTests
 
 FROM eclipse-temurin:21-jre
 WORKDIR /work

@@ -2,5 +2,6 @@
   quarkus:
     http:
       port: 8080
+      root-path: /api/v1/payroll
     funqy:
-      export: calculatePayroll
+      export: calculate

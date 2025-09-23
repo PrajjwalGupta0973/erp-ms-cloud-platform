@@ -22,15 +22,16 @@ public class CompanyClient {
     }
 
     public Mono<DepartmentDto> getDepartmentById(Long departmentId) {
+    	System.out.println("my-version");
         return webClient.get()
-                        .uri("/departments/{id}", departmentId)
+                        .uri("/api/v1/departments/{id}", departmentId)
                         .accept(MediaType.APPLICATION_JSON, MediaType.valueOf("application/json;charset=UTF-8"))
                         .retrieve()
                         .bodyToMono(DepartmentDto.class);
     }
     public Flux<DepartmentDto> streamDepartments() {
         return webClient.get()
-                .uri("/departments")
+                .uri("/api/v1/departments")
                 .accept(MediaType.TEXT_EVENT_STREAM)  // Accept SSE
                 .retrieve()
                 .bodyToFlux(DepartmentDto.class);     // Flux because multiple events

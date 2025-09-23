@@ -22,7 +22,7 @@ public class PayrollClient {
 	//@formatter:off
     public Mono<PayrollResult> calculatePayroll(PayrollRequest request) {
         return webClient.post()
-                .uri("/calculatePayroll")
+                .uri("/api/v1/payroll/calculate")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .bodyValue(request)

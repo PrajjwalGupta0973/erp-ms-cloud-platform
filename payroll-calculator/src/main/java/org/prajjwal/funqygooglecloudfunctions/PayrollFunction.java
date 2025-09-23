@@ -9,7 +9,7 @@ import io.quarkus.funqy.Funq;
 
 public class PayrollFunction {
 
-	@Funq
+	@Funq("calculate")
 	public PayrollResult calculatePayroll(PayrollRequest request) {
 		BigDecimal gross = request.getBaseSalary().add(request.getBonus());
 		BigDecimal tax = gross.multiply(BigDecimal.valueOf(0.20));
