@@ -14,7 +14,7 @@ spring:
   profiles:
     active: dev
 
-resources: 
+resources:
   requests:
     cpu: 100m #(means: 100m = 0.1 CPU core = 10% of a single CPU core.)
     memory: 128Mi
@@ -23,7 +23,7 @@ resources:
     memory: 256Mi
 
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas: 1
   maxReplicas: 3
   cpuUtilization: 70

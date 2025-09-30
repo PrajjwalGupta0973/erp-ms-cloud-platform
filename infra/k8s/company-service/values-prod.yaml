@@ -12,7 +12,6 @@ image:
   tag: latest
   # This sets the pull policy for images.
   pullPolicy: Always
-  
 
 # This is for the secrets for pulling an image from a private repository more information can be found here: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
 imagePullSecrets: []
@@ -39,10 +38,12 @@ podAnnotations: {}
 # For more information checkout: https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 podLabels: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -62,21 +63,21 @@ env:
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
   enabled: false
-#  className: ""
-#  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
-#  hosts:
-#    - host: chart-example.local
-#      paths:
-#        - path: /
-#          pathType: ImplementationSpecific
+  #  className: ""
+  #  annotations: {}
+  # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  #  hosts:
+  #    - host: chart-example.local
+  #      paths:
+  #        - path: /
+  #          pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local
 
-resources: 
+resources:
   requests:
     cpu: 100m #(means: 100m = 0.1 CPU core = 10% of a single CPU core.)
     memory: 128Mi
@@ -106,7 +107,7 @@ resources:
 
 # This section is for setting up autoscaling more information can be found here: https://kubernetes.io/docs/concepts/workloads/autoscaling/
 autoscaling:
-  enabled: true
+  enabled: false
   minReplicas: 1
   maxReplicas: 3
   targetCPUUtilizationPercentage: 70

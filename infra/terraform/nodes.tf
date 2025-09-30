@@ -1,5 +1,5 @@
 resource "aws_iam_role" "nodes" {
-  name = "${local.env}-${local.eks_cluster_name}-eks-nodes"
+  name               = "${local.env}-${local.eks_cluster_name}-eks-nodes"
   assume_role_policy = <<POLICY
     {
       "Version": "2012-10-17",
@@ -30,7 +30,7 @@ resource "aws_iam_role_policy_attachment" "amazon_ec2_container_registry_read_on
 }
 resource "aws_eks_node_group" "general" {
   cluster_name    = aws_eks_cluster.eks.name
-  version = local.eks_version
+  version         = local.eks_version
   node_group_name = "general"
   node_role_arn   = aws_iam_role.nodes.arn
   subnet_ids = [
@@ -39,12 +39,12 @@ resource "aws_eks_node_group" "general" {
   ]
   capacity_type = "ON_DEMAND"
   scaling_config {
-    desired_size = 2
+    desired_size = 3
     max_size     = 3
     min_size     = 1
   }
 
-  instance_types = ["t3.micro"]
+  instance_types = ["t3.medium"]
 
   update_config {
     max_unavailable = 1
@@ -58,7 +58,7 @@ resource "aws_eks_node_group" "general" {
     aws_iam_role_policy_attachment.amazon_ec2_container_registry_read_only
   ]
   lifecycle {
-    ignore_changes = [ scaling_config[0].desired_size ]
+    ignore_changes = [scaling_config[0].desired_size] # because terraform and cluster autoscaling can conflict
   }
-  
+
 }

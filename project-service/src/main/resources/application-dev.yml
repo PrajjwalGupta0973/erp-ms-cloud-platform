@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=project_db_schema
+    url: jdbc:postgresql://testpostgresdbaws.c4bs8igw8ni0.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=project_db_schema
     username: postgres
     password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
