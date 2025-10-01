@@ -9,9 +9,8 @@ data "aws_iam_policy_document" "aws_lbc" {
 
     actions = [
       "sts:AssumeRole",
-      "sts:TagSession",
+      "sts:TagSession"
     ]
-
   }
 }
 resource "aws_iam_role" "aws_lbc" {
@@ -34,7 +33,6 @@ resource "aws_eks_pod_identity_association" "aws_lbc" {
   namespace       = "kube-system"
   service_account = "aws-load-balancer-controller"
   role_arn        = aws_iam_role.aws_lbc.arn
-
 }
 
 resource "helm_release" "aws_lbc" {
@@ -52,6 +50,10 @@ resource "helm_release" "aws_lbc" {
     {
       name  = "serviceAccount.name"
       value = "aws-load-balancer-controller"
+    },
+    {
+      name  = "vpcId"
+      value = aws_vpc.main.id
     }
   ]
 

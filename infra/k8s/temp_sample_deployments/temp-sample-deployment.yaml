@@ -5,7 +5,7 @@ metadata:
   name: myapp
   namespace: 5-example
   labels:
-    app: nginx
+    app: myapp
 spec:
   replicas: 1
   selector:
@@ -21,7 +21,7 @@ spec:
           image: aputra/myapp-195:v2
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
           resources:
             requests:
               memory: 128Mi
