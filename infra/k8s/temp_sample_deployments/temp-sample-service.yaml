@@ -10,6 +10,7 @@ metadata:
     service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 spec:
   type: LoadBalancer
+  # type: ClusterIP
   ports:
     - name: web
       port: 8080
