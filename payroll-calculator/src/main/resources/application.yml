@@ -1,7 +1,8 @@
+#Below are not applicable when running in aws serverless env
 "%dev":
   quarkus:
     http:
       port: 8080
       root-path: /api/v1/payroll
     funqy:
-      export: calculate
+      export: calculatePayroll
