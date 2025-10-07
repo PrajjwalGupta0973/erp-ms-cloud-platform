@@ -3,17 +3,15 @@ kind: Service
 apiVersion: v1
 metadata:
   name: myapp
-  namespace: 5-example
-  annotations:
-    service.beta.kubernetes.io/aws-load-balancer-type: nlb
-    service.beta.kubernetes.io/aws-load-balancer-internal: "false"
-    service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+  namespace: 6-example
+  # annotations:
+  #   service.beta.kubernetes.io/aws-load-balancer-type: nlb
+  #   service.beta.kubernetes.io/aws-load-balancer-internal: "false"
+  #   service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
 spec:
-  type: LoadBalancer
-  # type: ClusterIP
+  type: ClusterIP
   ports:
-    - name: web
-      port: 8080
+    - port: 8080
       targetPort: http
   selector:
     app: myapp
