@@ -4,10 +4,7 @@ metadata:
   name: {{ .Release.Name }}
   labels:
     app: {{ .Release.Name }}
-  {{- if .Values.metadata.annotations }}
-  annotations:
-    {{- toYaml .Values.metadata.annotations | nindent 4 }}
-  {{- end }}
+ 
 spec:
   type: {{ .Values.service.type }}
   selector:
