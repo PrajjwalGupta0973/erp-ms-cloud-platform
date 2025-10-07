@@ -77,21 +77,7 @@ ingress:
           service:
             name: employee-service
             port: 80
-        - path: /api/v1/departments
-          pathType: Prefix
-          service:
-            name: company-service
-            port: 80
-        - path: /api/v1/projects
-          pathType: Prefix
-          service:
-            name: project-service
-            port: 80
-        - path: /api/v1/payroll
-          pathType: Prefix
-          service:
-            name: payroll-calculator
-            port: 80
+
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
