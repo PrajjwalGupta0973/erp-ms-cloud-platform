@@ -37,3 +37,6 @@ ingress:
   enabled: false
 serviceAccount:
   create: false
+db:
+ url:
+  jdbc:postgresql://database-1.c4bs8igw8ni0.us-east-1.rds.amazonaws.com:5432/postgres?currentSchema=project_db_schema
