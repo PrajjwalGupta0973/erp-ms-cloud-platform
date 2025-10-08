@@ -28,6 +28,9 @@ spec:
                 secretKeyRef:
                   name: common-secret
                   key: dbPassword
+          envFrom:
+            - configMapRef:
+                name: {{ .Release.Name }}-config
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       imagePullSecrets:

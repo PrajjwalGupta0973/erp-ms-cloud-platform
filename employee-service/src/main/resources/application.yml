@@ -7,7 +7,7 @@ spring:
     name: employee-service
   
   r2dbc:
-    url: r2dbc:postgresql://testpostgresdbaws.c4bs8igw8ni0.us-east-1.rds.amazonaws.com:5432/postgres?sslMode=require&currentSchema=employee_db
+    url: ${db.url}
     username: postgres
     password: ${DB_PASSWORD}
 #debug: true

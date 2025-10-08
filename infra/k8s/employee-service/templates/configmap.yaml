@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-config
+data:
+  externalServices.payrollCalculator: {{ .Values.externalServices.payrollCalculator.url | quote }}
+  db.url: {{ .Values.db.url| quote }}
