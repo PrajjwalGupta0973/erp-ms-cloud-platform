@@ -18,3 +18,19 @@ variable "vpc" {
 
 }
 
+variable "eks_cluster_name" {
+  description = "Name of the EKS cluster"
+  type        = string
+}
+
+variable "subnets" {
+  description = "List of subnet definitions"
+  type = list(object({
+    name              = string
+    cidr_block        = string
+    availability_zone = string
+    map_public_ip     = bool
+    kubernetes_role   = string
+  }))
+}
+

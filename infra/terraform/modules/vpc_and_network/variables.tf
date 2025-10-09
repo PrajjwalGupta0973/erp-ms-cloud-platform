@@ -1,10 +1,10 @@
 variable "env" {
-  description = "Environment name (e.g., dev, staging, prod)"
-  type        = string
+
+  type = string
 }
 
 variable "vpc" {
-  description = "VPC configuration"
+
   type = object({
     cidr_block           = string
     enable_dns_support   = bool
