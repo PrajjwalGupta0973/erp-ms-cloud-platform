@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: AWS Serverless Quarkus HTTP - payroll-calculator-1.0.0-SNAPSHOT
+Globals:
+  Api:
+    EndpointConfiguration: REGIONAL
+    BinaryMediaTypes:
+    - '*/*'
+Resources:
+  PayrollCalculator:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest
+      Runtime: java21
+      CodeUri: s3://prajjwal-s3-test-bucket/00da01bba7d3233524021acdcfa103da
+      MemorySize: 512
+      Role: arn:aws:iam::280600036923:role/erp-quarkus-lambda-role
+      Policies: AWSLambdaBasicExecutionRole
+      Timeout: 15
+      Events:
+        RestApiEvent:
+          Type: Api            # <- Switch from HttpApi to Api (REST API)
+          Properties:
+            Path: /{proxy+}   # your endpoint
+            Method: post
+    Metadata:
+      SamResourceId: PayrollCalculator
+Outputs:
+  PayrollCalculatorApi:
+    Description: URL for application
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod
+    Export:
+      Name: PayrollCalculatorApi
