@@ -46,3 +46,6 @@ variable "cluster_auto_scaler_namespace" {
 variable "auto_scaler_service_account_name" {
 
 }
+variable "awc_lbc_controller_role_policy_file_path" {
+
+}

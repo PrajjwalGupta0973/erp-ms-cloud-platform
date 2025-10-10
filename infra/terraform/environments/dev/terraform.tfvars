@@ -42,3 +42,5 @@ kubernetes_admin_group_name = "my-admin"
 metrics_server_values_yaml_file_path= "./values/metrics-server.yaml"
 cluster_auto_scaler_namespace = "kube-system"
 auto_scaler_service_account_name = "cluster-autoscaler"
+
+awc_lbc_controller_role_policy_file_path = "./values/AWSLoadBalancerController.json"

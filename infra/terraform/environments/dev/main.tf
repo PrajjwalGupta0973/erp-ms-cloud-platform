@@ -112,4 +112,13 @@ module "cluster_autoscaler" {
   depends_on           = [module.metrics_server]
 }
 
+module "aws_lbc" {
+  source = "../../modules/aws_lbc"
+
+  eks_cluster_name                     = module.eks_cluster.eks_cluster_name
+  vpc_id                               = module.vpc_and_network.vpc_id
+  cluster_autoscaler_helm_release_name = module.cluster_autoscaler.helm_release_name
+
+  iam_policy_file_path = var.awc_lbc_controller_role_policy_file_path
+}
 
