@@ -36,4 +36,6 @@ subnets = [
     kubernetes_role   = "role/elb"
   }
 ]
-eks_cluster_name = "erp-dev-cluster"
+eks_cluster_name = "erp"
+eks_admin_username = "eks-manager"
+kubernetes_admin_group_name = "my-admin"

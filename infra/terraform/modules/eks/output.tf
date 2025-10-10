@@ -16,3 +16,11 @@ output "eks_cluster_arn" {
 output "eks_cluster_version" {
   value = aws_eks_cluster.eks.version
 }
+
+output "cluster_endpoint" {
+  value = aws_eks_cluster.eks.endpoint
+}
+
+output "cluster_ca" {
+  value = aws_eks_cluster.eks.certificate_authority[0].data
+}

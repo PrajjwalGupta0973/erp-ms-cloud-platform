@@ -36,7 +36,7 @@ module "eks_cluster" {
   source = "../../modules/eks"
 
   env                     = var.env
-  eks_cluster_name        = "erp"
+  eks_cluster_name        = var.eks_cluster_name
   eks_version             = "1.29"
   private_subnet_ids      = module.subnets.private_subnet_ids
   endpoint_private_access = false
@@ -55,4 +55,20 @@ module "eks_nodes" {
   max_size       = 3
   min_size       = 1
 }
+module "eks_admin_user" {
+  source                      = "../../modules/eks_admin_user"
+  env                         = var.env
+  eks_cluster_name            = module.eks_cluster.eks_cluster_name
+  eks_admin_user_name         = var.eks_admin_username
+  kubernetes_admin_group_name = var.kubernetes_admin_group_name
+}
 
+data "aws_eks_cluster_auth" "eks_data" {
+  name = module.eks_cluster.eks_cluster_name
+}
+
+provider "kubernetes" {
+  host                   = module.eks_cluster.eks_cluster_name
+  cluster_ca_certificate = base64decode(module.eks_cluster.cluster_ca)
+  token                  = data.aws_eks_cluster_auth.eks_data.token
+}

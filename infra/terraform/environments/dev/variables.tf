@@ -1,14 +1,11 @@
 variable "region" {
-  description = "AWS region for this environment"
-  type        = string
+  type = string
 }
 variable "env" {
-  description = "Environment name (e.g., dev, staging, prod)"
-  type        = string
+  type = string
 }
 
 variable "vpc" {
-  description = "VPC configuration"
   type = object({
     cidr_block           = string
     enable_dns_support   = bool
@@ -19,12 +16,10 @@ variable "vpc" {
 }
 
 variable "eks_cluster_name" {
-  description = "Name of the EKS cluster"
-  type        = string
+  type = string
 }
 
 variable "subnets" {
-  description = "List of subnet definitions"
   type = list(object({
     name              = string
     cidr_block        = string
@@ -34,3 +29,9 @@ variable "subnets" {
   }))
 }
 
+variable "eks_admin_username" {
+
+}
+variable "kubernetes_admin_group_name" {
+
+}
