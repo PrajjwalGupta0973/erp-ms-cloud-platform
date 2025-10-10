@@ -94,5 +94,13 @@ module "metrics_server" {
     module.eks_nodes.node_group
   ]
 }
+module "pod_identity_addon" {
+  source       = "../../modules/eks_addon"
+  cluster_name = module.eks_cluster.eks_cluster_name
+
+  depends_on = [
+    module.eks_cluster
+  ]
+}
 
 
