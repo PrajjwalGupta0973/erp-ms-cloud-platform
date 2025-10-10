@@ -6,3 +6,7 @@ output "node_role_arn" {
 output "node_group_name" {
   value = aws_eks_node_group.general.node_group_name
 }
+
+output "node_group" {
+  value = aws_eks_node_group.general
+}

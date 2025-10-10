@@ -39,3 +39,4 @@ subnets = [
 eks_cluster_name = "erp"
 eks_admin_username = "eks-manager"
 kubernetes_admin_group_name = "my-admin"
+metrics_server_values_yaml_file_path= "./values/metrics-server.yaml"

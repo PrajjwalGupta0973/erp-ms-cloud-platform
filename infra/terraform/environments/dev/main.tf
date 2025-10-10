@@ -86,3 +86,13 @@ provider "helm" {
   }
 }
 
+module "metrics_server" {
+  source = "../../modules/metrics_server"
+
+  metrics_server_values_yaml_file_path = var.metrics_server_values_yaml_file_path
+  dependence_on = [
+    module.eks_nodes.node_group
+  ]
+}
+
+

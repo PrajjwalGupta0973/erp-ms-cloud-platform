@@ -35,3 +35,7 @@ variable "eks_admin_username" {
 variable "kubernetes_admin_group_name" {
 
 }
+
+variable "metrics_server_values_yaml_file_path" {
+
+}
