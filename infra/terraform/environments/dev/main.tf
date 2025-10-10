@@ -102,5 +102,14 @@ module "pod_identity_addon" {
     module.eks_cluster
   ]
 }
+module "cluster_autoscaler" {
+
+  source               = "../../modules/cluster_autoscaler"
+  eks_cluster_name     = module.eks_cluster.eks_cluster_name
+  region               = var.region
+  service_account_name = var.auto_scaler_service_account_name
+  namespace            = var.cluster_auto_scaler_namespace
+  depends_on           = [module.metrics_server]
+}
 
 

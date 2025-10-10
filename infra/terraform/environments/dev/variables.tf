@@ -40,3 +40,9 @@ variable "metrics_server_values_yaml_file_path" {
 
 }
 
+variable "cluster_auto_scaler_namespace" {
+
+}
+variable "auto_scaler_service_account_name" {
+
+}
