@@ -23,3 +23,8 @@
 hs_err_pid*
 replay_pid*
 **/.terraform/
+*.hcl
+*.tfstate
+infra/terraform/environments/dev/terraform.tfstate.backup
+*.project
+kubectl

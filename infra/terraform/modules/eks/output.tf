@@ -13,3 +13,6 @@ output "eks_cluster_endpoint" {
 output "eks_cluster_arn" {
   value = aws_eks_cluster.eks.arn
 }
+output "eks_cluster_version" {
+  value = aws_eks_cluster.eks.version
+}

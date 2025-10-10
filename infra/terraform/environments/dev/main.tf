@@ -42,3 +42,17 @@ module "eks_cluster" {
   endpoint_private_access = false
   endpoint_public_access  = true
 }
+module "eks_nodes" {
+  source             = "../../modules/eks_nodes"
+  env                = var.env
+  eks_cluster_name   = module.eks_cluster.eks_cluster_name
+  eks_version        = module.eks_cluster.eks_cluster_version
+  private_subnet_ids = module.subnets.private_subnet_ids
+
+  capacity_type  = "ON_DEMAND"
+  instance_types = ["t3.medium"]
+  desired_size   = 2
+  max_size       = 3
+  min_size       = 1
+}
+
