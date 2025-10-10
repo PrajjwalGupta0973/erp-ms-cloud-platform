@@ -32,3 +32,13 @@ module "route_tables" {
   internet_gateway_id = module.internet_gateway.id
 }
 
+module "eks_cluster" {
+  source = "../../modules/eks"
+
+  env                     = var.env
+  eks_cluster_name        = "erp"
+  eks_version             = "1.29"
+  private_subnet_ids      = module.subnets.private_subnet_ids
+  endpoint_private_access = false
+  endpoint_public_access  = true
+}
