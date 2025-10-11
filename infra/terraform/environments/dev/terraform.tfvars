@@ -44,3 +44,4 @@ cluster_auto_scaler_namespace = "kube-system"
 auto_scaler_service_account_name = "cluster-autoscaler"
 
 awc_lbc_controller_role_policy_file_path = "./values/AWSLoadBalancerController.json"
+nginx_values_yaml_file_path = "./values/nginx-ingress.yaml"

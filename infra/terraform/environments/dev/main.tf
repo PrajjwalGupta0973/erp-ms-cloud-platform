@@ -133,4 +133,14 @@ module "aws_lbc" {
 
   iam_policy_file_path = var.awc_lbc_controller_role_policy_file_path
 }
+module "nginx_controller" {
+  source           = "../../modules/nginx_controller"
+  values_file_path = var.nginx_values_yaml_file_path
+
+  depends_on = [
+    module.aws_lbc.helm_release_name,
+    module.eks_cluster.wait_for_eks
+  ]
+}
+
 

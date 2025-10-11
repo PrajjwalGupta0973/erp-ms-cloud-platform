@@ -49,3 +49,6 @@ variable "auto_scaler_service_account_name" {
 variable "awc_lbc_controller_role_policy_file_path" {
 
 }
+variable "nginx_values_yaml_file_path" {
+
+}

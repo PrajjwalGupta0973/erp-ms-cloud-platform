@@ -43,6 +43,6 @@ serviceAccount:
   create: false
 externalServices:
     payrollCalculator:
-        url: https://wiwwr1hui3.execute-api.us-east-1.amazonaws.com
+        url: https://ad71myrt4h.execute-api.us-east-1.amazonaws.com
 db:
   url: r2dbc:postgresql://database-1.c4bs8igw8ni0.us-east-1.rds.amazonaws.com:5432/postgres?sslMode=require&currentSchema=employee_db

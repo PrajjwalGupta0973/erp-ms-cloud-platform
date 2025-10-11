@@ -10,7 +10,7 @@ resource "aws_subnet" "this" {
     {
       Name                                                       = "${var.env}-${each.value.name}"
       "kubernetes.io/cluster/${var.env}-${var.eks_cluster_name}" = "owned"
-      "kubernetes.io/role/${each.value.kubernetes_role}"         = "1"
+      "kubernetes.io/${each.value.kubernetes_role}"              = "1"
     },
     {}
   )
