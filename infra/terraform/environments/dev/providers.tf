@@ -1,6 +1,5 @@
 provider "aws" {
-  region  = var.region
-  profile = "terraform-vpc-admin-role-profile" # Remove this later and provide AWS CLI profile access keys in default section in aws credential file 
+  region = var.region
 }
 
 terraform {

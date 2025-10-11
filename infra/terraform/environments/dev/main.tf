@@ -41,6 +41,7 @@ module "eks_cluster" {
   private_subnet_ids      = module.subnets.private_subnet_ids
   endpoint_private_access = false
   endpoint_public_access  = true
+  region                  = var.region
 }
 module "eks_nodes" {
   source             = "../../modules/eks_nodes"
@@ -51,7 +52,7 @@ module "eks_nodes" {
 
   capacity_type  = "ON_DEMAND"
   instance_types = ["t3.medium"]
-  desired_size   = 2
+  desired_size   = 3
   max_size       = 3
   min_size       = 1
 }
@@ -63,26 +64,38 @@ module "eks_admin_user" {
   kubernetes_admin_group_name = var.kubernetes_admin_group_name
 }
 
-data "aws_eks_cluster" "eks" {
-  name = module.eks_cluster.eks_cluster_name
-}
+# data "aws_eks_cluster" "eks" {
+#   name       = module.eks_cluster.eks_cluster_name
+#   depends_on = [module.eks_nodes]
+# }
 
-data "aws_eks_cluster_auth" "eks" {
-  name = module.eks_cluster.eks_cluster_name
-}
+# data "aws_eks_cluster_auth" "eks" {
+#   name       = module.eks_cluster.eks_cluster_name
+#   depends_on = [module.eks_nodes]
+# }
 
 provider "kubernetes" {
-  host                   = data.aws_eks_cluster.eks.endpoint
-  cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
-  token                  = data.aws_eks_cluster_auth.eks.token
+  host                   = module.eks_cluster.eks_cluster_endpoint
+  cluster_ca_certificate = base64decode(module.eks_cluster.eks_cluster_ca_certificate)
+  exec {
+    api_version = "client.authentication.k8s.io/v1beta1"
+    command     = "aws"
+    args        = ["eks", "get-token", "--cluster-name", module.eks_cluster.eks_cluster_id]
+  }
+
 }
 
 provider "helm" {
 
   kubernetes = {
-    host                   = data.aws_eks_cluster.eks.endpoint
-    cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority[0].data)
-    token                  = data.aws_eks_cluster_auth.eks.token
+    host                   = module.eks_cluster.eks_cluster_endpoint
+    cluster_ca_certificate = base64decode(module.eks_cluster.eks_cluster_ca_certificate)
+    exec = {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      command     = "aws"
+      args        = ["eks", "get-token", "--cluster-name", module.eks_cluster.eks_cluster_id]
+    }
+
   }
 }
 
@@ -115,9 +128,8 @@ module "cluster_autoscaler" {
 module "aws_lbc" {
   source = "../../modules/aws_lbc"
 
-  eks_cluster_name                     = module.eks_cluster.eks_cluster_name
-  vpc_id                               = module.vpc_and_network.vpc_id
-  cluster_autoscaler_helm_release_name = module.cluster_autoscaler.helm_release_name
+  eks_cluster_name = module.eks_cluster.eks_cluster_name
+  vpc_id           = module.vpc_and_network.vpc_id
 
   iam_policy_file_path = var.awc_lbc_controller_role_policy_file_path
 }

@@ -24,3 +24,6 @@ variable "endpoint_public_access" {
   type    = bool
   default = true
 }
+variable "region" {
+
+}

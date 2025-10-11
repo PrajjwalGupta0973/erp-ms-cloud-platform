@@ -39,3 +39,14 @@ resource "aws_eks_cluster" "eks" {
 
   depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
 }
+data "aws_eks_cluster_auth" "eks" {
+  name = aws_eks_cluster.eks.name
+}
+
+resource "null_resource" "wait_for_eks" {
+  provisioner "local-exec" {
+    command = "aws eks wait cluster-active --name ${aws_eks_cluster.eks.name} --region ${var.region}"
+  }
+
+  depends_on = [aws_eks_cluster.eks]
+}
