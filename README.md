@@ -1,15 +1,15 @@
-Microservices:
-Company-service: Quarkus reactive
-Employee-service: Spring reactive
-Project-service: Traditional Spring boot + Hibernate
-Payroll-calculator: Serverless Quarkus app
+Microservices:<br>
+Company-service: Quarkus reactive <br>
+Employee-service: Spring reactive <br>
+Project-service: Traditional Spring boot + Hibernate <br>
+Payroll-calculator: Serverless Quarkus app <br>
 
-Repository link: https://github.com/PrajjwalGupta0973/erp-ms-cloud-platform
-Build script location:
-root/infra/k8s/{project_name}
+Repository link: https://github.com/PrajjwalGupta0973/erp-ms-cloud-platform <br> <br>
+Build script location: <br>
+root/infra/k8s/{project_name} <br>
 
-Helm Chart:
-root/infra/k8s
+Deployemnt Helm Chart: <br>
+root/infra/k8s/{project_name} <br>
 
-Terraform modules:
-root/infra/terraform
+Terraform modules: <br>
+root/infra/terraform <br>
