@@ -6,7 +6,7 @@ Payroll-calculator: Serverless Quarkus app <br>
 
 Repository link: https://github.com/PrajjwalGupta0973/erp-ms-cloud-platform <br> <br>
 Build script location: <br>
-root/infra/k8s/{project_name} <br>
+root/infra/k8s/{project_name}/build-and-push.sh <br>
 
 Deployemnt Helm Chart: <br>
 root/infra/k8s/{project_name} <br>
